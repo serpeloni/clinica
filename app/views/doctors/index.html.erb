@@ -1,0 +1,17 @@
+<h2>Médicos</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th></th>
+        <tr>
+    </thead>
+
+    <tbody>
+        <% @doctors.each do |doctor| %>
+            <td><%= doctor.name %></td>
+            <td><%= link_to 'Exibir', doctor %></td>
+        <% end %>
+    </tbody>
+</table>

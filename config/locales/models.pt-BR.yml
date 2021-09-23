@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      doctor:
+        one: Médico
+        other: Médicos
+    attributes:
+      doctor:
+        name: Nome
+        email: Email
+        crm: CRM
+        specialty_id: Especialidade

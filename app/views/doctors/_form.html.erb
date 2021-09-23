@@ -1,0 +1,33 @@
+<% if @doctor.errors.any? %>
+    <ul>
+        <% @doctor.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+        <% end %>
+    </ul>
+<% end %>
+
+<%= form_with(model: @doctor) do |form|  %>
+
+    <div>
+        <%= form.label :name %>
+        <%= form.text_field :name %>
+    </div>
+
+    <div>
+        <%= form.label :email %>
+        <%= form.text_field :email %>
+    </div>
+
+    <div>
+        <%= form.label :crm %>
+        <%= form.number_field :crm %>
+    </div>
+
+    <div>
+        <%= form.label :specialty_id %>
+        <%= form.collection_select :specialty_id, Specialty.order(:description), :id, :description %>
+    </div>
+
+    <%= form.submit %>
+
+<% end %>
