@@ -1,0 +1,66 @@
+<%= form_with(model: patient) do |form| %>
+  <% if patient.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(patient.errors.count, "error") %> prohibited this patient from being saved:</h2>
+
+      <ul>
+        <% patient.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.text_field :email %>
+  </div>
+
+  <div class="field">
+    <%= form.label :birthdate %>
+    <%= form.date_field :birthdate %>
+  </div>
+
+  <h3>Address</h3>
+  <%= form.fields_for :address do |address_form| %>
+    <div class="field">
+      <%= address_form.label :street %>
+      <%= address_form.text_field :street %>
+    </div>
+
+    <div class="field">
+      <%= address_form.label :number %>
+      <%= address_form.number_field :number %>
+    </div>
+
+    <div class="field">
+      <%= address_form.label :city %>
+      <%= address_form.text_field :city %>
+    </div>
+  <% end %>
+
+  <h3>Telephones</h3>
+  <div id='telephones'>
+    <%= form.fields_for :telephones do |telephone_form| %>
+      <%= render 'telephone_fields', form: telephone_form %>
+    <% end %>
+  </div>
+  <%= link_to_add_nested(form, :telephones, '#telephones') %>
+
+  <h3>doctors</h3>
+  <div class="field">
+    <%= form.label :doctor_ids %>
+    <%= form.collection_check_boxes :doctor_ids, Doctor.order(:name), :id, :name %>
+  </div>
+
+  <%= form.file_field :photo %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

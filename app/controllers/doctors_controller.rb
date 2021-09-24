@@ -1,4 +1,6 @@
 class DoctorsController < ApplicationController
+  before_action :set_doctor, only: [ :show, :edit, :update, :destroy ]
+
   # GET /doctors
   def index
     @doctors = Doctor.all
@@ -6,7 +8,6 @@ class DoctorsController < ApplicationController
 
   # GET /doctors/:id
   def show
-    @doctor = Doctor.find(params[:id])
   end
 
   # GET /doctors/new
@@ -28,14 +29,25 @@ class DoctorsController < ApplicationController
   end
 
   def update
+    if @doctor.update(doctor_params)
+      redirect_to @doctor, notice: "Médico Atualizado"
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def destroy
+    @doctor.destroy
+    redirect_to doctors_url, notice: 'Médico Excluído'
   end
 
   private
 
   def doctor_params
     params.require(:doctor).permit(:name, :email, :crm, :specialty_id)
+  end
+
+  def set_doctor
+    @doctor = Doctor.find(params[:id])
   end
 end

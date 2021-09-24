@@ -10,8 +10,14 @@
 
     <tbody>
         <% @doctors.each do |doctor| %>
+            <tr>
             <td><%= doctor.name %></td>
-            <td><%= link_to 'Exibir', doctor %></td>
+            <td>
+                <%= link_to 'Exibir', doctor %>
+                <%= link_to 'Editar', edit_doctor_path(doctor) %>
+                <%= link_to 'Excluir', doctor, method: :delete, data: { confirm: 'Tem certeza?' } %>
+            </td>
+            </tr>
         <% end %>
     </tbody>
 </table>

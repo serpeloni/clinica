@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<img src="<%= url_for(@patient.photo) %>" />
+
+<p>
+  <strong>Name:</strong>
+  <%= @patient.name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @patient.email %>
+</p>
+
+<p>
+  <strong>Birthdate:</strong>
+  <%= l @patient.birthdate %>
+</p>
+
+<h3>Address</h3>
+<p>
+  <strong>Street:</strong>
+  <%= @patient.address.street %>
+</p>
+
+<p>
+  <strong>Number:</strong>
+  <%= @patient.address.number %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @patient.address.city %>
+</p>
+
+<%= link_to 'Edit', edit_patient_path(@patient) %> |
+<%= link_to 'Back', patients_path %>
