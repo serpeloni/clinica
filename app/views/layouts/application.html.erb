@@ -12,7 +12,15 @@
 
   <body>
     <h1>Clínica</h1>
+    <% if user_signed_in? %>
+    <h3><%= current_user.email %></h3>
+    <%= link_to("Sair", destroy_user_session_path, method: :delete ) %>
+    <% end %>
     <%= notice %>
+    <p class="alert"><%= alert %></p>
     <%= yield %>
+
+    <br/>
+    
   </body>
 </html>

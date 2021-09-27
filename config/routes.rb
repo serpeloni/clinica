@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  devise_for :users
+  get 'email/:id/', to: "email#index", as: "email"
+  post 'email/:id/', to: "email#send_email", as: "send_email"
   resources :patients
   #get home/index'
   #get '/home', to: 'home#index'

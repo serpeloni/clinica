@@ -4,9 +4,14 @@ pt-BR:
       doctor:
         one: Médico
         other: Médicos
+      patient:
+        one: Paciente
+        other: Pacientes
     attributes:
       doctor:
         name: Nome
         email: Email
         crm: CRM
         specialty_id: Especialidade
+      patient:
+        name: Nome

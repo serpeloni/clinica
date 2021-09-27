@@ -1,0 +1,10 @@
+<h2>Email</h2>
+
+
+<%= form_with(url: send_email_path(@patient))  do |form| %>
+
+    <%= form.text_area :message %>
+
+    <%= form.submit "Enviar" %>
+
+<% end %>

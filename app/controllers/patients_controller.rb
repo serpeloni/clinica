@@ -3,11 +3,18 @@ class PatientsController < ApplicationController
 
   # GET /patients or /patients.json
   def index
-    @patients = Patient.all
+    #@patients = Patient.under_years(40).order_by_name
+    @patients = Patient.order_by_name.page(params[:page])
   end
 
   # GET /patients/1 or /patients/1.json
   def show
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "show"
+      end
+    end
   end
 
   # GET /patients/new
@@ -26,6 +33,7 @@ class PatientsController < ApplicationController
 
     respond_to do |format|
       if @patient.save
+        PatientAlertJob.set(wait: 1.minute).perform_later @patient
         format.html { redirect_to @patient, notice: "Patient was successfully created." }
         format.json { render :show, status: :created, location: @patient }
       else

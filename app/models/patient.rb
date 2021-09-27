@@ -10,4 +10,7 @@ class Patient < ApplicationRecord
     accepts_nested_attributes_for :telephones, allow_destroy: true
 
     has_one_attached :photo
+
+    scope :under_years, -> (count) { where("birthdate >= ?", Date.today - count.years) }
+    scope :order_by_name, -> { order(:name) }
 end
