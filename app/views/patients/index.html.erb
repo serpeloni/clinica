@@ -17,7 +17,7 @@
         <td><%= patient.name %></td>
         <td><%= patient.email %></td>
         <td><%= link_to 'Show', patient %></td>
-        <td><%= link_to 'Edit', edit_patient_path(patient) %></td>
+        <td><% if can? :edit, patient %><%= link_to 'Edit', edit_patient_path(patient) %><% end %></td>
         <td><%= link_to 'Destroy', patient, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <td><%= link_to 'Email', email_path(patient) %></td>
       </tr>
@@ -29,4 +29,6 @@
 
 <br>
 
+<% if can? :create, Patient %>
 <%= link_to 'New Patient', new_patient_path %>
+<% end %>

@@ -1,10 +1,13 @@
 class PatientsController < ApplicationController
+  load_and_authorize_resource
   before_action :set_patient, only: %i[ show edit update destroy ]
 
   # GET /patients or /patients.json
   def index
     #@patients = Patient.under_years(40).order_by_name
-    @patients = Patient.order_by_name.page(params[:page])
+    #@patients = Patient.accessible_by(current_ability).order_by_name.page(params[:page])
+    #authorize! :read, Patient
+    @patients = @patients.includes(:telephones).order_by_name.page(params[:page])
   end
 
   # GET /patients/1 or /patients/1.json
@@ -68,7 +71,7 @@ class PatientsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_patient
-      @patient = Patient.find(params[:id])
+      @patient = Patient.includes(:telephones).find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
